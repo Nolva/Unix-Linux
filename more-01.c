@@ -1,5 +1,5 @@
-/**read and print 24lines then pause for a few special commands.
- */ 
+//编译：cc more-01.c -o more-01
+//运行:more-01 more-01.c
 #include<stdio.h>
 #define PAGELEN 24
 #define LINELEN 512
@@ -14,11 +14,11 @@ int see_more();
  */ 
 int main(int ac, char av[]){
     FILE *fp;// 定义一个FILE指针
-    if(ac == 1){
-        // 显示信息从键盘输入
+
+    if(ac == 1){// 一个参数则从标准输入获取数据
         do_more(stdin);
     }
-    else{
+    else{//不止一个参数则从文件获取数据
         // 显示信息从文件读取
         while(--ac){
 
@@ -40,9 +40,10 @@ int main(int ac, char av[]){
     return 0;
 }
 
+/**将数据显示在屏幕上，满屏后，调用see_more()接收用户的输入
+ */ 
 void do_more(FILE* fp){
-    /**read PAGELEN lines, then call see_more() for further instruction
-     */ 
+    
     char line[LINELEN];
     int num_of_lines = 0;
     int reply;
@@ -51,7 +52,7 @@ void do_more(FILE* fp){
      * 从文件指针stream中读取n-1个字符，存到以s为起始地址的空间里，直到读完一行
      * 如果成功返回s的指针；失败返回NULL。
      */ 
-    while( fgets(line, LINELEN, fp )){// more input
+    while(fgets(line, LINELEN, fp)){  // more input
         if( num_of_lines == PAGELEN ){// 目前已显示行数等于最大显示行数
             reply = see_more();       // 等待用户输入
             if( reply == 0)           // 用户输入q或发生错误，退出do_more函数
@@ -71,9 +72,8 @@ void do_more(FILE* fp){
     }
 }
 
-/*
-*print message,wait for response,return # of lines to advance
-*q means no,space means yes,CR means one line
+/*print message,wait for response,return # of lines to advance
+* q means no,space means yes,CR means one line
 */
 int see_more(){
     int c;
