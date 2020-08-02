@@ -14,7 +14,7 @@
  * 4. 如何使程序能够处理各种类型的终端？->学会如何控制和调整终端参数
  */
 #include <stdio.h>
-// #include<stdlib.h>
+#include<stdlib.h>
 #define PAGELEN 24
 #define LINELEN 512
 
@@ -92,7 +92,7 @@ void do_more(FILE *fp)
             num_of_lines -= reply; // 重置计数器num_of_lines，即count
         }
 
-        // fputs输出到stdout标准输出，直到End Of File 文档最后
+        // fputs输出到stdout标准输出，直到End Of File文档最后
         if (fputs(line, stdout) == EOF)
         {
             // printf("读文档完毕");

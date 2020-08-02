@@ -73,7 +73,7 @@ void do_more(FILE *fp)
     while (fgets(line, LINELEN, fp))
     {
 
-        // 如果屏幕满了，即文件内容超过24行（shell只能显示24行）
+        // 如果屏幕满了，即读取文件内容恰好24行（shell只能显示24行）
         if (num_of_lines == PAGELEN)
         {
             // 输出判断用户是否要继续读文件的格式
@@ -84,11 +84,11 @@ void do_more(FILE *fp)
             {
                 break;
             }
-            // 另外的PAGELEN或1
-            num_of_lines -= reply; // 重置计数器num_of_lines，即count
+            // 其他情况的reply为PAGELEN或1
+            num_of_lines -= reply; // 重置计数器num_of_lines，减1往下读取一行，减24读取24行
         }
 
-        // fputs输出到stdout标准输出，直到End Of File 文档最后
+        // fputs输出到stdout标准输出，直到End Of File文档最后
         if (fputs(line, stdout) == EOF)
         {
             printf("读文档完毕");

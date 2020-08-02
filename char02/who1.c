@@ -1,6 +1,28 @@
+/**
+ * utmp记录当前正在使用系统的用户信息；wtmp记录所有的登录和注销的用户信息，涉及命令：login、init、ac
+ * 若文件销毁，则功能失效。
+ * /var/adm/utmp  保存了结构数组，数组的元素是utmp类型的结构
+ * /var/include/utmp.h  包含了utmp类型的定义
+ * utmp.h中
+ * ut_user数组保存登录名
+ * ut_line数组保存设备名，用户的终端类型
+ * ut_time保存登录时间
+ * ut_host保存用户用于登录的远程计算机的名字
+ * 
+ * 由man who和utmp以及utmp.h可推断who的工作原理：
+ * who通过读utmp文件来获取重要的信息，而每个登录的用户在utmp文件中都有对应的记录。
+ * 数据流：
+ * 1. 打开utmp
+ * 2. 读取记录
+ * 3. 显示记录
+ * 4. 关闭utmp
+ * 我们要做的
+ *  - 从文件中读取数据结构
+ *  - 从结构中的信息以合适的形式形式
+ */
 #include<stdio.h>
-#include<utmp.h>
 #include<fcntl.h>
+#include<utmp.h>
 #include<unistd.h>
 #include<time.h>
 #define SHOWHOST
