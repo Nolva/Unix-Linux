@@ -25,7 +25,7 @@ int main(int ac, char *av[]){
  *      unsigned shorted d_reclen;
  *      char d_name[1];   (how can he do this ?)
  * }
- */ 
+ */
 void do_ls(char direname[]){
 
     // 目录指针: opendir(char*)返回DIR*，我们可以据此判断是否存在direname目录
